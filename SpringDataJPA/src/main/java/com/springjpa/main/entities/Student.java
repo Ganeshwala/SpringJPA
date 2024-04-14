@@ -1,6 +1,7 @@
 package com.springjpa.main.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -8,6 +9,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -40,8 +46,8 @@ public class Student {
 			allocationSize = 1 //what is increment value
 			)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "s_sequence")
-	@Column(name = "S_Id" ,nullable = false)
-	private Long studentId;
+	@Column(name = "S_Id")
+	private long studentId;
 	
 	@Column(name="StudentFirstName", nullable = false)
 	private String firstName;
@@ -60,8 +66,17 @@ public class Student {
 	@Embedded
 	private Address address;
 	
-	private String guardianName;
-	private String guardianEmail;
-	private String guardianPhone;
+	@ManyToMany
+	@JoinTable(
+			name="student_course_tb",
+			joinColumns = @JoinColumn(
+					name="stdId",
+					referencedColumnName = "S_Id"),
+			inverseJoinColumns = @JoinColumn(
+					name="cId",
+					referencedColumnName = "courseId"
+					)
+			)
+	private List<Course> courses;
 	
 }
