@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,4 +22,7 @@ public class Course {
 	private long courseId;
 	private String courseTitle;
 	private int credit;
+	
+	@OneToOne(mappedBy = "courseObjInMaterial")
+	private CourseMaterial courseMaterial;
 }

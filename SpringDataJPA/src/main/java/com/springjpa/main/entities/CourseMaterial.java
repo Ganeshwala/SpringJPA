@@ -1,6 +1,8 @@
 package com.springjpa.main.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,6 +26,6 @@ public class CourseMaterial {
 			name="course_Id", // what will be join column in DB 
 			referencedColumnName = "courseId" //class field name that we want to refer here
 			)
-	@OneToOne
-	private Course course;
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private Course courseObjInMaterial;
 }
