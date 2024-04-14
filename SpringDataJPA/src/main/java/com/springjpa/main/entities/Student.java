@@ -3,6 +3,7 @@ package com.springjpa.main.entities;
 import java.util.Date;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -55,6 +56,9 @@ public class Student {
 	
 	@Column(name="BirthDate", nullable = false)
 	private Date dob;
+	
+	@Embedded
+	private Address address;
 	
 	private String guardianName;
 	private String guardianEmail;
